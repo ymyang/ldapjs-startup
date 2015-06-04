@@ -35,6 +35,7 @@ var groupoptions = {
     filter: '(objectclass=group)'
 };
 
+
 client.search('dc=test,dc=com', useroptions, function(err, res){
     if (err) {
         console.error(err);
@@ -49,7 +50,7 @@ client.search('dc=test,dc=com', useroptions, function(err, res){
         console.log('count:', count);
     });
     res.on('error', function(err) {
-        console.error('error: ' + err.message);
+        console.error('error: ' + err.name);
         console.log('count:', count);
     });
     res.on('end', function(result) {
