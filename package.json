@@ -1,0 +1,22 @@
+{
+  "name": "ldapjs-startup",
+  "version": "1.0.0",
+  "description": "node ldap sample",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ymyang/ldapjs-startup.git"
+  },
+  "author": "yang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ymyang/ldapjs-startup/issues"
+  },
+  "homepage": "https://github.com/ymyang/ldapjs-startup#readme",
+  "dependencies": {
+    "ldapjs": "^0.7.1"
+  }
+}
