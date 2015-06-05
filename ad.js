@@ -21,7 +21,7 @@ client.bind('administrator@test.com', 'qycloud@1234', function(err) {
 
 var useroptions = {
     scope: 'sub',
-    sizeLimit: 5000,
+    //sizeLimit: 5000,
     filter: '(&(objectclass=user)(!(objectclass=computer)))'
 };
 
@@ -34,7 +34,6 @@ var groupoptions = {
     scope: 'sub',
     filter: '(objectclass=group)'
 };
-
 
 client.search('dc=test,dc=com', useroptions, function(err, res){
     if (err) {
