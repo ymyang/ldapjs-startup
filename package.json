@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/ymyang/ldapjs-startup#readme",
   "dependencies": {
-    "ldapjs": "^0.7.1"
+    "ldapjs": "^1.0.0"
   }
 }

@@ -4,7 +4,7 @@
 var ldap = require('ldapjs');
 
 var client = ldap.createClient({
-    url: 'ldap://192.168.1.131:389'
+    url: 'ldap://192.168.1.91:389'
     //maxConnections: 5,
     //bindDN: 'administrator@test.com',
     //bindCredentials: 'qycloud@1234',
@@ -12,7 +12,7 @@ var client = ldap.createClient({
     //maxIdleTime: 60000
 });
 
-client.bind('administrator@test.com', 'qycloud@1234', function(err) {
+client.bind('administrator@yliyun.com', 'yliyun@123', function(err) {
     if (err) {
         console.error(err);
     }
@@ -35,7 +35,7 @@ var groupoptions = {
     filter: '(objectclass=group)'
 };
 
-client.search('dc=test,dc=com', useroptions, function(err, res){
+client.search('dc=yliyun,dc=com', useroptions, function(err, res){
     if (err) {
         console.error(err);
     }
