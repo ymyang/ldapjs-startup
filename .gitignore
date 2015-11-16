@@ -1,3 +1,5 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Node template
 # Logs
 logs
 *.log
@@ -16,22 +18,26 @@ coverage
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
+# node-waf configuration
+.lock-wscript
+
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 
 # Dependency directory
-# Deployed apps should consider commenting this line out:
-# see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
-winclient/sea-modules
-#/.idea
-_
-/_
-tmp
-cache
-build
-dist
-#node_modules
-nw.exe.lnk
-release
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+node_modules
+node_modules/
+.idea
+.idea/
 
-res/nw/0.12.3/win32/db
+build
+temp
+temp/
+tmp
+tmp/
+output
+output/
+
+
+
