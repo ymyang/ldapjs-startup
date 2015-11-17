@@ -4,10 +4,10 @@
 var ldap = require('ldapjs');
 
 var client = ldap.createClient({
-    url: 'ldap://192.168.1.91:389'
+    url: 'ldap://192.168.1.91:389',
     //maxConnections: 5,
-    //bindDN: 'administrator@test.com',
-    //bindCredentials: 'qycloud@1234',
+    bindDN: 'administrator@yliyun.com',
+    bindCredentials: 'yliyun@123'
     //checkInterval: 30000,
     //maxIdleTime: 60000
 });
@@ -58,3 +58,7 @@ client.search('dc=yliyun,dc=com', useroptions, function(err, res){
     });
 });
 
+//client.unbind();
+//client.destroy({});
+
+console.log('over');
