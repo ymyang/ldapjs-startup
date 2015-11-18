@@ -4,61 +4,82 @@
 var ldap = require('ldapjs');
 
 var client = ldap.createClient({
-    url: 'ldap://192.168.1.91:389',
+    url: 'ldap://192.168.1.81:389',
     //maxConnections: 5,
-    bindDN: 'administrator@yliyun.com',
+    bindDN: 'administrator@ad.yliyun.com',
     bindCredentials: 'yliyun@123'
     //checkInterval: 30000,
     //maxIdleTime: 60000
 });
 
-client.bind('administrator@yliyun.com', 'yliyun@123', function(err) {
-    if (err) {
-        console.error(err);
-    }
-    console.log('bind ok');
-});
+_getUser();
 
-var useroptions = {
-    scope: 'sub',
-    //sizeLimit: 5000,
-    filter: '(&(objectclass=user)(!(objectclass=computer)))'
-};
+function _bind() {
+    client.bind('administrator@ad.yliyun.com', 'yliyun@123', function(err) {
+        if (err) {
+            console.error(err);
+        }
+        console.log('bind ok');
+    });
+}
 
-var ouoptions = {
-    scope: 'sub',
-    filter: '(objectclass=organizationalUnit)'
-};
+function _getOu() {
+    var options = {
+        scope: 'one',
+        filter: '(objectclass=organizationalUnit)',
+        //sizeLimit: 2,
+        paged: true
+        //paged: {
+        //    pageSize: 1
+        //}
+    };
+    _search(options);
+}
 
-var groupoptions = {
-    scope: 'sub',
-    filter: '(objectclass=group)'
-};
+function _getUser() {
+    var options = {
+        scope: 'sub',
+        //sizeLimit: 5000,
+        filter: '(&(objectclass=user)(!(objectclass=computer)))'
+    };
+    _search(options);
+}
 
-client.search('dc=yliyun,dc=com', useroptions, function(err, res){
-    if (err) {
-        console.error(err);
-    }
-    var count = 0;
-    res.on('searchEntry', function(entry) {
-        console.log('entry: ' + JSON.stringify(entry.object));
-        count ++;
+function _getGroup() {
+    var options = {
+        scope: 'sub',
+        filter: '(objectclass=group)'
+    };
+    _search(options);
+}
+
+function _search(options) {
+    client.search('dc=ad,dc=yliyun,dc=com', options, function(err, res){
+        if (err) {
+            console.error(err);
+        }
+        var count = 0;
+        res.on('searchEntry', function(entry) {
+            console.log('entry: ' + JSON.stringify(entry.object));
+            count ++;
+        });
+        res.on('searchReference', function(referral) {
+            console.log('referral: ' + referral.uris.join());
+            console.log('count:', count);
+        });
+        res.on('error', function(err) {
+            console.error('error: ' + err);
+            console.log('count:', count);
+        });
+        //res.on('page', function(result) {
+        //    console.log('page end');
+        //});
+        res.on('end', function(result) {
+            console.log('status: ' + result.status);
+            console.log('count:', count);
+        });
     });
-    res.on('searchReference', function(referral) {
-        console.log('referral: ' + referral.uris.join());
-        console.log('count:', count);
-    });
-    res.on('error', function(err) {
-        console.error('error: ' + err.name);
-        console.log('count:', count);
-    });
-    res.on('end', function(result) {
-        console.log('status: ' + result.status);
-        console.log('count:', count);
-    });
-});
+}
 
 //client.unbind();
 //client.destroy({});
-
-console.log('over');
