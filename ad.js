@@ -12,13 +12,16 @@ var client = ldap.createClient({
     //maxIdleTime: 60000
 });
 
-_getUser();
+_bind();
+
+//_getUser();
 
 function _bind() {
-    client.bind('administrator@ad.yliyun.com', 'yliyun@123', function(err) {
+    client.bind('ymyangw@ad.yliyun.com', 'yliyun@123', function(err) {
         if (err) {
-            console.error(err);
+            console.error(JSON.stringify(err));
         }
+        client.unbind();
         console.log('bind ok');
     });
 }
