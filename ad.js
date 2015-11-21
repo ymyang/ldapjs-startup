@@ -14,7 +14,7 @@ var client = ldap.createClient({
 
 _bind();
 
-//_getUser();
+//_getUsers();
 
 function _bind() {
     client.bind('ymyangw@ad.yliyun.com', 'yliyun@123', function(err) {
@@ -26,7 +26,7 @@ function _bind() {
     });
 }
 
-function _getOu() {
+function _getOUs() {
     var options = {
         scope: 'one',
         filter: '(objectclass=organizationalUnit)',
@@ -39,7 +39,7 @@ function _getOu() {
     _search(options);
 }
 
-function _getUser() {
+function _getUsers() {
     var options = {
         scope: 'sub',
         //sizeLimit: 5000,
